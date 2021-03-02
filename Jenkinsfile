@@ -54,7 +54,6 @@ stage('Build') {
      steps {
       sh ' mvn checkstyle:checkstyle'
       recordIssues(tools: [checkStyle(reportEncoding: 'UTF-8')])
-      ])
      }
     }
    }
