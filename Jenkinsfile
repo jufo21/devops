@@ -42,9 +42,9 @@ stage('Build') {
      }
   }
   stage('Unit Tests') {
-   when {
+  /* when {
     anyOf { branch 'master'; branch 'develop' }
-   }
+   } */
    agent {
     docker {
      image 'maven:3.6.0-jdk-8-alpine'
@@ -62,9 +62,9 @@ stage('Build') {
    }
   }
   stage('Integration Tests') {
-   when {
+ /*  when {
     anyOf { branch 'master'; branch 'develop' }
-   }
+   } */
    agent {
     docker {
      image 'maven:3.6.0-jdk-8-alpine'
@@ -88,9 +88,9 @@ stage('Build') {
    }
   }
   stage('Deploy Artifact To Nexus') {
-   when {
+  /* when {
     anyOf { branch 'master'; branch 'develop' }
-   }
+   } */
    steps {
     script {
      unstash 'pom'
