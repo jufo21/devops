@@ -43,7 +43,7 @@ stage('Build') {
       sh ' mvn clean compile'
      }
     }
- /*   stage('CheckStyle') {
+   stage('CheckStyle') {
      agent {
       docker {
        image 'maven:3.6.0-jdk-8-alpine'
@@ -53,18 +53,10 @@ stage('Build') {
      }
      steps {
       sh ' mvn checkstyle:checkstyle'
-      step([$class: 'CheckStylePublisher',
-       //canRunOnFailed: true,
-       defaultEncoding: '',
-       healthy: '100',
-       pattern: '**/
-	   /* a remonter ligne au dessus
-	   target/checkstyle-resulttarget/checkstyle-result.xml',
-       unHealthy: '90',
-       //useStableBuildAsReference: true
+      recordIssues(tools: [checkStyle(reportEncoding: 'UTF-8')])
       ])
      }
-    } */
+    }
    }
   }
   stage('Unit Tests') {
