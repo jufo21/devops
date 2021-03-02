@@ -29,8 +29,9 @@ pipeline {
    }
   }
 stage('Build') {
-   parallel {
-    stage('Compile') {
+	when {
+    anyOf { branch 'master'; branch 'compile' }
+   }
      agent {
       docker {
        image 'maven:3.6.0-jdk-8-alpine'
@@ -42,21 +43,6 @@ stage('Build') {
      steps {
       sh ' mvn clean compile'
      }
-    }
-   stage('CheckStyle') {
-     agent {
-      docker {
-       image 'maven:3.6.0-jdk-8-alpine'
-       args '-v /root/.m2/repository:/root/.m2/repository'
-       reuseNode true
-      }
-     }
-     steps {
-      sh ' mvn checkstyle:checkstyle'
-      recordIssues(tools: [checkStyle(reportEncoding: 'UTF-8')])
-     }
-    }
-   }
   }
   stage('Unit Tests') {
    when {
