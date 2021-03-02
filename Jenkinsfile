@@ -29,9 +29,6 @@ pipeline {
    }
   }
 stage('Build') {
-	when {
-    anyOf { branch 'master'; branch 'compile' }
-   }
      agent {
       docker {
        image 'maven:3.6.0-jdk-8-alpine'
