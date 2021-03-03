@@ -139,9 +139,9 @@ stage('Build') {
    }
   }
   stage('Deploy to Staging Servers') {
-   when {
+   /*when {
     anyOf { branch 'master'; branch 'develop' }
-   }
+   }*/
    agent {
     docker {
      image 'ahmed24khaled/ansible-management'
@@ -173,9 +173,9 @@ stage('Build') {
    }
   }
    stage('Deploy to Production Servers') {
-   when {
+  /* when {
     branch 'master'
-   }
+   }*/
    agent {
     docker {
      image 'ahmed24khaled/ansible-management'
